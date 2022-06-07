@@ -20,13 +20,15 @@ class SerialGenerator:
     def __init__(self, start):
         '''Create serial number generator from starting number'''
         self.start = start
-        self.counter = start - 1
+        self.last_num_given = start - 1
 
     def generate(self):
         '''increments the serial number by 1 every time it is called'''
-        self.counter += 1
-        return self.counter
+        self.last_num_given += 1
+        return self.last_num_given
 
     def reset(self):
         '''when called resets the counter to original start num'''
-        self.counter = self.start - 1
+        self.last_num_given = self.start - 1
+
+#counter more explict
