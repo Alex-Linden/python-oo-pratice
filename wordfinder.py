@@ -1,5 +1,4 @@
 from random import choice as pick_word
-LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 
 
 class WordFinder:
@@ -11,23 +10,19 @@ class WordFinder:
         print( f"{len(self.words_list)} words read")
 
     def random(self):
-        """selects a random word from the word list in the instance"""
+        """selects a random word from a list of words in the instance"""
         return pick_word(self.words_list)
 
     def get_words_list(self):
-        """called when the instance is created to get words_list from file"""
+        """returns a list of words from the file_path given at creatation"""
         file = open(self.file_path)
         return [line.strip() for line in file]
 
 
 class SpecialWordFinder(WordFinder):
-    """This sub class accounts for lists that don't start with a letter and doesn't include them"""
-
-    def __init__(self, file_path):
-        """creates a list of words from a file path and a prints number of words in the list"""
-        super().__init__(file_path)
+    """This sub class removes list items that start with a # or are a blank space"""
 
     def get_words_list(self):
-        """called when the instance is created to get words_list from file"""
-        file = open(self.file_path)
-        return [line.strip() for line in file if line[0].lower() in LETTERS ]
+        """returns a list of words from the file_path given at creatation """
+        return [item for item in super().get_words_list()
+            if not item == '' and not item.startswith('#')]
